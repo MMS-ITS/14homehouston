@@ -196,3 +196,60 @@ Deliver two outputs with the same content:
 2.	A PDF in A4 portrait with the page number on every page ("Page X of Y"), laid out to print cleanly.
 Conventions: US dollars; temperatures in °C; dates written as day, month and year; every figure sourced and dated; estimates labelled.
 
+
+---
+
+## Output — analysis dated 4 October 2026
+
+The template above was applied to the listings in the attached screenshots. Both deliverables required
+by section 11 are in this repository:
+
+| Deliverable | File |
+|---|---|
+| Interactive HTML artifact, with a live calculator | [`index.html`](index.html) |
+| A4 portrait PDF, "Page X of Y" on every page (210 pages) | [`MMS-Rental-Due-Diligence.pdf`](MMS-Rental-Due-Diligence.pdf) |
+
+### Headline
+
+**No listing in this set covers its own costs as a long-term rental at the standard assumptions.**
+Monthly cash flow runs from −$1,429 to −$378. Cap rates are 0.72%–4.44% against debt costing 6.5%, so
+every property is negatively levered. The highest score is 52.8 / 100, below the template's own pass
+mark of 55, so the section 6 decision rule returns **Pass** for all twelve.
+
+**Eleven of the twelve cannot reach break-even at any mortgage interest rate.** Their net operating
+income is less than the principal repayment alone on an interest-free 30-year loan, so a rate buydown
+cannot rescue them — only a materially lower price or materially higher rent can.
+
+Three costs drive this: Texas MUD tax rates of 3.00%–3.55% of value a year, Lennar masterplan HOA
+assessments of $183–$192 a month against the template's $75 benchmark, and rent-to-price ratios of
+0.55%–0.86% where roughly 1% is needed.
+
+### What the list itself contains
+
+- The 14 screenshots hold **12 unique properties** — IMG_3503 duplicates IMG_3490, and IMG_3506 has no link.
+- **Two are not homes.** Stable View (Lafayette, LA) and Crest at Morganfield (Lake Charles, LA) are
+  builder *community* pages with price ranges, not addresses.
+- **Two appear already sold** — 173 Cotton Cv (Snook) and 6515 Little Yellow Ct (Needville) are absent
+  from their builders' current inventories.
+- So **8 are live, priced, specific homes**.
+- Only 3 of the 12 images are daylight photographs of the completed front elevation, as section 3 requires.
+- Four of the twelve are not in the Houston market despite the repository name.
+
+### Reproducing it
+
+```
+python3 generate.py      # rewrites index.html and the PDF
+python3 engine.py        # prints the comparison table to the terminal
+```
+
+- `data/properties.json` — every input with its source and retrieval date
+- `engine.py` — sections 5, 6, 7 and 10 of the template
+- `generate.py` — renders both deliverables
+
+Zillow, Trulia, HAR and NewHomeSource all return HTTP 403 to the analysis environment, so listing facts
+were verified against the builders' own sites (lennar.com, centurycommunities.com, drhorton.com) and
+redfin.com, and flood zones were queried directly from the FEMA National Flood Hazard Layer. Rents are
+medians of three market-level sources per property and are labelled estimates: no property manager has
+confirmed them, and no HOA leasing permission has been seen, which the template treats as a blocking red
+flag for all twelve. Each property's scorecard shows how many of its 100 points rest on verified rather
+than provisional inputs — between 28 and 42.

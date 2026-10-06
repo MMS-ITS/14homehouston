@@ -1,0 +1,5 @@
+# Scratch directory for fetched third-party pages and screenshots used during research.
+# Not committed: the pages belong to their publishers and the report records every source.
+.cache/
+__pycache__/
+*.pyc
